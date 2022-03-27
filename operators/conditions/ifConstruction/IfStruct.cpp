@@ -5,6 +5,8 @@
 #include "IfStruct.h"
 #include <iostream>
 #include <utility>
+#include <regex>
+
 
 IfStruct::IfStruct() = default;
 
@@ -38,7 +40,11 @@ vector<string> IfStruct::split(const string &s, const string &delimiter) {
 }
 
 string IfStruct::extractBody(const string& text) {
-    return text.substr(text.find('{') + 1, text.find('}') - text.find('{') - 1);
+    string code = text.substr(text.find('{') + 1, text.find('}') - text.find('{') - 1);
+    code = regex_replace(regex_replace(code,regex("\t"),""),
+                                   regex("\n"),
+                                   "") ;
+    return code;
 }
 
 string IfStruct::extractCondition(const string& text) {

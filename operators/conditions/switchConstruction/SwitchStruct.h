@@ -10,23 +10,26 @@
 using namespace std;
 
 class SwitchStruct {
+    struct Case {
+        string conditional;
+        string body;
+    };
 public:
-    SwitchStruct(string conditions, string body);
+
+    SwitchStruct(string conditions, const vector<Case>& body);
 
     SwitchStruct();
     static vector<SwitchStruct> extractAndProcessSwitch(const string& text);
 
-
 private:
     string conditions;
-    string body;
+    vector<Case> body;
 
     static vector<string> split(const string &s, const string &delimiter);
 
-    static string extractBody(string text);
+    static vector<Case> extractBody(string text);
 
     static string extractCondition(const string& text);
 };
-
 
 #endif //OOP_LAB3_SWITCHSTRUCT_H

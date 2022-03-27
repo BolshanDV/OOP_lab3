@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 class IfStruct {
 
 public:
@@ -19,15 +18,15 @@ public:
 private:
     string condition;
     string body;
-    static vector<string> split(const string& s, const string& delimiter);
 
-public:
-    static vector<IfStruct> extractAndProcessIf(const string& text);
+    static vector<string> split(const string& s, const string& delimiter);
 
     static string extractBody(const string &text);
 
     static string extractCondition(const string& text);
-};
 
+public:
+    static vector<IfStruct> extractAndProcessIf(const string& text);
+};
 
 #endif //OOP_LAB3_IFSTRUCT_H
