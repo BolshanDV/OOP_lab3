@@ -19,7 +19,9 @@ int main() {
     Parser parser;
     string initialText = readingFile();
     parser.extract(initialText);
-    vector<ForStruct> i = parser.getFor();
+    vector<ForStruct> forElementStorage = parser.getFor();
+    vector<IfStruct> ifElementStorage = parser.getIf();
+    vector<SwitchStruct> switchElementStorage = parser.getSwitch();
     cout << "Successful" << endl;
     return 0;
 }

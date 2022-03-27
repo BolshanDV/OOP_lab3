@@ -4,18 +4,44 @@
 
 #include "IfStruct.h"
 #include <iostream>
+#include <utility>
 
+IfStruct::IfStruct() = default;
 
-void IfStruct::setCondition(const string &condition) {
-    IfStruct::condition = condition;
+IfStruct::IfStruct(string condition, string body) : condition(std::move(condition)), body(std::move(body)) {}
+
+vector<IfStruct> IfStruct::extractAndProcessIf(const string& text) {
+    vector<string> ifVector = split(text, "if(");
+    vector<IfStruct> ifStorage;
+    for (int i = 1; i < ifVector.size(); i++) {
+        string body = extractBody(ifVector[i]);
+        string condition = extractCondition(ifVector[i]);
+        IfStruct ifElement (condition, body);
+        ifStorage.push_back(ifElement);
+    }
+    return ifStorage;
 }
 
-void IfStruct::setBody(const string &body) {
-    IfStruct::body = body;
+vector<string> IfStruct::split(const string &s, const string &delimiter) {
+    size_t pos_start = 0, pos_end, delim_len = delimiter.length();
+    string token;
+    vector<string> res;
+
+    while ((pos_end = s.find (delimiter, pos_start)) != string::npos) {
+        token = s.substr (pos_start, pos_end - pos_start);
+        pos_start = pos_end + delim_len;
+        res.push_back (token);
+    }
+
+    res.push_back (s.substr (pos_start));
+    return res;
 }
 
-IfStruct::IfStruct(const string &condition, const string &body) : condition(condition), body(body) {}
-
-void IfStruct::print() {
-    cout << body + condition << endl;
+string IfStruct::extractBody(const string& text) {
+    return text.substr(text.find('{') + 1, text.find('}') - text.find('{') - 1);
 }
+
+string IfStruct::extractCondition(const string& text) {
+    return text.substr(0, text.find(')'));
+}
+

@@ -26,25 +26,11 @@ public:
 
     [[nodiscard]] const vector<IfStruct> &getIf() const;
 
-private:
-    void extractAndProcessFors(const string& text);
+    void setFor (const vector<ForStruct>& forElement);
 
-    vector<string> split(const string& s, const string& delimiter);
+    void setIf (const vector<IfStruct>& ifElement);
 
-    string processForType(string &forBlock);
-
-    string leftTrim(string str);
-
-    vector<string> extractConditionals( const string& stringifyFor);
-
-    string extractBody(const string& body, const string& type);
-
-    string extractClassicBodyLines(const string& forBlock);
-
-    string extractWithoutBracketsBodyLines(const string& forBlock);
-
-public:
-    void setFor (const ForStruct& forElement);
+    void setSwitch (const vector<SwitchStruct>& switchElement);
 
     void extract (const string& initialText);
 

@@ -5,22 +5,28 @@
 #ifndef OOP_LAB3_IFSTRUCT_H
 #define OOP_LAB3_IFSTRUCT_H
 #include <string>
+#include <vector>
+
 using namespace std;
 
 
 class IfStruct {
+
 public:
-    IfStruct(const string &condition, const string &body);
+    IfStruct(string condition, string body);
+    IfStruct();
 
 private:
     string condition;
     string body;
+    static vector<string> split(const string& s, const string& delimiter);
+
 public:
-    void setCondition(const string &condition);
+    static vector<IfStruct> extractAndProcessIf(const string& text);
 
-    void setBody(const string &body);
+    static string extractBody(const string &text);
 
-    void print ();
+    static string extractCondition(const string& text);
 };
 
 

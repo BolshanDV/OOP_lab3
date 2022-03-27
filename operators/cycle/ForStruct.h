@@ -10,20 +10,34 @@
 using namespace std;
 
 class ForStruct {
+
 public:
-    ForStruct(const string &body, const string &initElement, const string &conditionElement,
-              const string &incrementElement);
+    ForStruct(string body, string initElement, string conditionElement,
+              string incrementElement);
+    ForStruct();
+
+    static vector<ForStruct> extractAndProcessFors(const string& text);
 
 private:
     string body;
     string initElement;
     string conditionElement;
     string incrementElement;
-public:
-    string print() {
-        return incrementElement + conditionElement + incrementElement + body;
-    }
-};
 
+    static vector<string> split(const string& s, const string& delimiter);
+
+    static string processForType(string &forBlock);
+
+    static string leftTrim(string str);
+
+    static vector<string> extractConditionals( const string& stringifyFor);
+
+    static string extractBody(const string& body, const string& type);
+
+    static string extractClassicBodyLines(const string& forBlock);
+
+    static string extractWithoutBracketsBodyLines(const string& forBlock);
+
+};
 
 #endif //OOP_LAB3_FORSTRUCT_H

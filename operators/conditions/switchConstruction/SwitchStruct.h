@@ -5,26 +5,27 @@
 #ifndef OOP_LAB3_SWITCHSTRUCT_H
 #define OOP_LAB3_SWITCHSTRUCT_H
 #include <string>
+#include <vector>
+
 using namespace std;
 
 class SwitchStruct {
 public:
-    SwitchStruct(const string &argument, const string &conditions, const string &body);
+    SwitchStruct(string conditions, string body);
+
+    SwitchStruct();
+    static vector<SwitchStruct> extractAndProcessSwitch(const string& text);
+
 
 private:
-    string argument;
     string conditions;
     string body;
-public:
-    void setArgument(const string &argument);
 
-    void setConditions(const string &conditions);
+    static vector<string> split(const string &s, const string &delimiter);
 
-    void setBody(const string &body);
+    static string extractBody(string text);
 
-    string print () {
-        return argument + conditions + body;
-    }
+    static string extractCondition(const string& text);
 };
 
 
