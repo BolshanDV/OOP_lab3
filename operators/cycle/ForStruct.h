@@ -5,6 +5,8 @@
 #ifndef OOP_LAB3_FORSTRUCT_H
 #define OOP_LAB3_FORSTRUCT_H
 #include <string>
+#include <vector>
+
 using namespace std;
 
 class ForStruct {
@@ -18,14 +20,6 @@ private:
     string conditionElement;
     string incrementElement;
 public:
-    void setBody(const string &body);
-
-    void setInitElement(const string &initElement);
-
-    void setConditionElement(const string &conditionElement);
-
-    void setIncrementElement(const string &incrementElement);
-
     string print() {
         return incrementElement + conditionElement + incrementElement + body;
     }

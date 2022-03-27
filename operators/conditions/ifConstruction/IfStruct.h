@@ -19,9 +19,8 @@ public:
     void setCondition(const string &condition);
 
     void setBody(const string &body);
-    string print () {
-        return condition + body;
-    }
+
+    void print ();
 };
 
 

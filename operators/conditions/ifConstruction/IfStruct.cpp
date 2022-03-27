@@ -3,6 +3,7 @@
 //
 
 #include "IfStruct.h"
+#include <iostream>
 
 
 void IfStruct::setCondition(const string &condition) {
@@ -14,3 +15,7 @@ void IfStruct::setBody(const string &body) {
 }
 
 IfStruct::IfStruct(const string &condition, const string &body) : condition(condition), body(body) {}
+
+void IfStruct::print() {
+    cout << body + condition << endl;
+}
