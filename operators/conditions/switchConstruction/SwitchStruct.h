@@ -10,20 +10,16 @@
 using namespace std;
 
 class SwitchStruct {
-    struct Case {
-        string conditional;
-        string body;
-    };
 public:
 
-    SwitchStruct(string conditions, const vector<Case>& body);
+    SwitchStruct(string conditions, const string& body);
 
     SwitchStruct();
     static vector<SwitchStruct> extractAndProcessSwitch(const string& text);
 
 private:
     string conditions;
-    vector<Case> body;
+    string body;
 public:
     const string &getConditions() const;
 
@@ -32,8 +28,12 @@ private:
     static vector<string> split(const string &s, const string &delimiter);
 
 private:
-    static vector<Case> extractBody(string text);
+    static string extractBody(string text);
 
+public:
+    const string &getBody() const;
+
+private:
     static string extractCondition(const string& text);
 };
 

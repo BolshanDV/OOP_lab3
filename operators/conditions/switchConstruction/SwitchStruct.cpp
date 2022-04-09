@@ -11,7 +11,7 @@ vector<SwitchStruct> SwitchStruct::extractAndProcessSwitch(const string &text) {
     vector<SwitchStruct> switchStorage;
     for (int i = 1; i < switchVector.size(); i++) {
         string condition = extractCondition(switchVector[i]);
-        vector<Case> body = extractBody(switchVector[i]);
+        string body = extractBody(switchVector[i]);
         SwitchStruct switchElement (condition, body);
         switchStorage.push_back(switchElement);
     }
@@ -35,53 +35,57 @@ struct Case {
     string conditional;
     string body;
 };
-vector<SwitchStruct::Case> SwitchStruct::extractBody(string text) {
-    Case caseObj;
-    vector<Case> caseVector;
+string SwitchStruct::extractBody(string text) {
+//    Case caseObj;
+//    vector<Case> caseVector;
     string code = text.erase(0, text.find('{') + 1);
     code = code.substr(code.find('{') + 1, code.find('}') - code.find('{') - 1);
-    vector<string> caseElement = split(code, "case");
+//    vector<string> caseElement = split(code, "case");
 
-    for (int j = 1; j < caseElement.size(); j++) {
-        caseElement[j] = regex_replace(regex_replace(caseElement[j],regex("\t"),""),
-                      regex("\n"),
-                      "") ;
+//    for (int j = 1; j < caseElement.size(); j++) {
+//        caseElement[j] = regex_replace(regex_replace(caseElement[j],regex("\t"),""),
+//                      regex("\n"),
+//                      "") ;
+//
+//        caseElement[j] = regex_replace(caseElement[j],regex(" "),"");
+//
+//        caseObj.conditional = caseElement[j].substr(0, caseElement[j].find(':'));
+//
+//        if (caseElement[j].find("break") == -1){
+//            caseObj.body =  caseElement[j].substr(caseElement[j].find(':') + 1);
+//        } else {
+//            caseObj.body =  caseElement[j].substr(caseElement[j].find(':') + 1,
+//                                                  caseElement[j].find("break") + 5 - caseElement[j].find(':'));
+//        }
+//
+//        caseVector.push_back(caseObj);
+//    }
+//
+//    string defaultElement = split(code, "default")[1];
+//    defaultElement = regex_replace(regex_replace(defaultElement,regex("\t"),""),
+//                                   regex("\n"),
+//                                   "") ;
+//    defaultElement = regex_replace(defaultElement,regex(" "),"");
+//
+//    caseObj.body = defaultElement.substr(defaultElement.find(':'));
+//    caseObj.conditional = "";
+//    caseVector.push_back(caseObj);
 
-        caseElement[j] = regex_replace(caseElement[j],regex(" "),"");
-
-        caseObj.conditional = caseElement[j].substr(0, caseElement[j].find(':'));
-
-        if (caseElement[j].find("break") == -1){
-            caseObj.body =  caseElement[j].substr(caseElement[j].find(':') + 1);
-        } else {
-            caseObj.body =  caseElement[j].substr(caseElement[j].find(':') + 1,
-                                                  caseElement[j].find("break") + 5 - caseElement[j].find(':'));
-        }
-
-        caseVector.push_back(caseObj);
-    }
-
-    string defaultElement = split(code, "default")[1];
-    defaultElement = regex_replace(regex_replace(defaultElement,regex("\t"),""),
-                                   regex("\n"),
-                                   "") ;
-    defaultElement = regex_replace(defaultElement,regex(" "),"");
-
-    caseObj.body = defaultElement.substr(defaultElement.find(':'));
-    caseObj.conditional = "";
-    caseVector.push_back(caseObj);
-
-    return caseVector;
+    return code;
 }
 
 string SwitchStruct::extractCondition(const string& text) {
     return text.substr(0, text.find(')'));
 }
 
-SwitchStruct::SwitchStruct(string conditions, const vector<Case>& body) : conditions(std::move(conditions)), body(body) {}
+SwitchStruct::SwitchStruct(string conditions, const string& body) : conditions(std::move(conditions)), body(body) {}
 
 const string &SwitchStruct::getConditions() const {
     return conditions;
+}
+
+const string &SwitchStruct::getBody() const {
+    return body;
 }
 
 SwitchStruct::SwitchStruct() = default;

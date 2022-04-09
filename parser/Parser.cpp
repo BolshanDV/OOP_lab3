@@ -60,26 +60,34 @@ void Parser::createText(const vector<Parser>& arr) {
         string item;
         if ( !i.getFor().getConditionElement().empty()) {
             int num = countSign(i.getFor().getBody());
-            if (num == 1) {
-                item = "for(" + i.getFor().getInitElement() +
-                       ";" +
-                       i.getFor().getConditionElement() +
-                       ";" +
-                       i.getFor().getIncrementElement() +
-                       ")\n\t" +
-                       i.getFor().getBody() +
-                       "\n\n";
+            if (!i.getFor().getBody().empty()) {
+                if (num == 1) {
+                    item = "for(" + i.getFor().getInitElement() +
+                           ";" +
+                           i.getFor().getConditionElement() +
+                           ";" +
+                           i.getFor().getIncrementElement() +
+                           ")\n\t" +
+                           i.getFor().getBody() +
+                           "\n\n";
+                } else {
+                    item = "for(" + i.getFor().getInitElement() +
+                           ";" +
+                           i.getFor().getConditionElement() +
+                           ";" +
+                           i.getFor().getIncrementElement() +
+                           "){\n" +
+                           i.getFor().getBody() +
+                           "\n}\n";
+                }
             } else {
                 item = "for(" + i.getFor().getInitElement() +
                        ";" +
                        i.getFor().getConditionElement() +
                        ";" +
                        i.getFor().getIncrementElement() +
-                       "){\n" +
-                       i.getFor().getBody() +
-                       "\n}\n";
+                       ");";
             }
-
             creatureReadyFile(item);
             continue;
         }
@@ -99,7 +107,10 @@ void Parser::createText(const vector<Parser>& arr) {
             continue;
         }
         if ( !i.getSwitch().getConditions().empty()){
-            item = "switch( " + i.getSwitch().getConditions() + "){\n";
+            item = "switch( " + i.getSwitch().getConditions() + "){" +
+                    i.getSwitch().getBody() + "}";
+            creatureReadyFile(item);
+            continue;
         }
     }
 }
