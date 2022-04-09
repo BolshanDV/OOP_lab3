@@ -15,25 +15,32 @@ using namespace std;
 
 class Parser {
 private:
-    vector<ForStruct> For;
-    vector<IfStruct> If;
-    vector<SwitchStruct> Switch;
+    ForStruct For;
+    IfStruct If;
+    SwitchStruct Switch;
+public:
 
 public:
-    [[nodiscard]] const vector<ForStruct> &getFor() const;
+    const ForStruct &getFor() const;
 
-    [[nodiscard]] const vector<SwitchStruct> &getSwitch() const;
+    const IfStruct &getIf() const;
 
-    [[nodiscard]] const vector<IfStruct> &getIf() const;
+    const SwitchStruct &getSwitch() const;
 
-    void setFor (const vector<ForStruct>& forElement);
+    void setFor (const ForStruct& forElement);
 
-    void setIf (const vector<IfStruct>& ifElement);
+    void setIf (const IfStruct& ifElement);
 
-    void setSwitch (const vector<SwitchStruct>& switchElement);
+    void setSwitch (const SwitchStruct& switchElement);
 
-    void extract (const string& initialText);
+    void createText (const vector<Parser>& arr);
 
+    vector<Parser> extract (const string& initialText);
+
+    static int countSign (const string& body);
+
+private:
+    void creatureReadyFile (const string& text);
 };
 
 

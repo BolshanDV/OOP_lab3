@@ -51,3 +51,11 @@ string IfStruct::extractCondition(const string& text) {
     return text.substr(0, text.find(')'));
 }
 
+const string &IfStruct::getCondition() const {
+    return condition;
+}
+
+const string &IfStruct::getBody() const {
+    return body;
+}
+

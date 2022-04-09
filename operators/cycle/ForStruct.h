@@ -30,6 +30,17 @@ private:
 
     static string leftTrim(string str);
 
+public:
+    const string &getBody() const;
+
+    const string &getInitElement() const;
+
+    const string &getConditionElement() const;
+
+    const string &getIncrementElement() const;
+
+private:
+
     static vector<string> extractConditionals( const string& stringifyFor);
 
     static string extractBody(const string& body, const string& type);

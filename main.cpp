@@ -18,10 +18,8 @@ string readingFile() {
 int main() {
     Parser parser;
     string initialText = readingFile();
-    parser.extract(initialText);
-    vector<ForStruct> forElementStorage = parser.getFor();
-    vector<IfStruct> ifElementStorage = parser.getIf();
-    vector<SwitchStruct> switchElementStorage = parser.getSwitch();
+    vector<Parser> storage = parser.extract(initialText);
+    parser.createText(storage);
     cout << "Successful" << endl;
     return 0;
 }

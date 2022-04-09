@@ -15,6 +15,10 @@ public:
     IfStruct(string condition, string body);
     IfStruct();
 
+    const string &getCondition() const;
+
+    const string &getBody() const;
+
 private:
     string condition;
     string body;

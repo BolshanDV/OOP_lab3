@@ -80,4 +80,10 @@ string SwitchStruct::extractCondition(const string& text) {
 
 SwitchStruct::SwitchStruct(string conditions, const vector<Case>& body) : conditions(std::move(conditions)), body(body) {}
 
+const string &SwitchStruct::getConditions() const {
+    return conditions;
+}
+
 SwitchStruct::SwitchStruct() = default;
+
+

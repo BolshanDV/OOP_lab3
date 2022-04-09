@@ -24,9 +24,14 @@ public:
 private:
     string conditions;
     vector<Case> body;
+public:
+    const string &getConditions() const;
+
+private:
 
     static vector<string> split(const string &s, const string &delimiter);
 
+private:
     static vector<Case> extractBody(string text);
 
     static string extractCondition(const string& text);

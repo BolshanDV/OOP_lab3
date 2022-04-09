@@ -100,4 +100,20 @@ string ForStruct::extractWithoutBracketsBodyLines(const string &forBlock) {
     return splitedText;
 }
 
+const string &ForStruct::getBody() const {
+    return body;
+}
+
+const string &ForStruct::getInitElement() const {
+    return initElement;
+}
+
+const string &ForStruct::getConditionElement() const {
+    return conditionElement;
+}
+
+const string &ForStruct::getIncrementElement() const {
+    return incrementElement;
+}
+
 ForStruct::ForStruct() = default;
