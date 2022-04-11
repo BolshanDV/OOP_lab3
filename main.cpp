@@ -1,7 +1,6 @@
 #include <iostream>
 #include "fstream"
 #include "parser/Parser.h"
-
 using namespace std;
 
 string readingFile() {
@@ -18,7 +17,7 @@ string readingFile() {
 int main() {
     Parser parser;
     string initialText = readingFile();
-    vector<Parser> storage = parser.extract(initialText);
+    List<Parser> storage = parser.extract(initialText);
     parser.createText(storage);
     cout << "Successful" << endl;
     return 0;

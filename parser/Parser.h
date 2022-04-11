@@ -9,6 +9,7 @@
 #include "../operators/cycle/ForStruct.h"
 #include "../operators/conditions/ifConstruction/IfStruct.h"
 #include "../operators/conditions/switchConstruction/SwitchStruct.h"
+#include "../ListStruct/List.h"
 
 using namespace std;
 
@@ -33,9 +34,9 @@ public:
 
     void setSwitch (const SwitchStruct& switchElement);
 
-    void createText (const vector<Parser>& arr);
+    void createText ( List<Parser> arr);
 
-    vector<Parser> extract (const string& initialText);
+    List<Parser> extract (const string& initialText);
 
     static int countSign (const string& body);
 

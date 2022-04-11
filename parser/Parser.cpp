@@ -4,13 +4,14 @@
 
 #include "Parser.h"
 #include <regex>
+#include "../ListStruct/List.h"
 #include "fstream"
-
-vector<Parser> Parser::extract(const string& initialText) {
+List<Parser> Parser::extract(const string& initialText) {
 //    setFor(ForStruct::extractAndProcessFors(initialText));
 //    setIf(IfStruct::extractAndProcessIf(initialText));
 //    setSwitch(SwitchStruct::extractAndProcessSwitch(initialText));
-        vector<Parser> parserList;
+//        vector<Parser> parserList;
+        List<Parser> parserList;
         int ifCounter = 0;
         int forCounter = 0;
         int switchCounter = 0;
@@ -22,25 +23,24 @@ vector<Parser> Parser::extract(const string& initialText) {
                 vector<IfStruct> ifStorage = IfStruct::extractAndProcessIf(initialText);
                 item.setIf(ifStorage[ifCounter]);
                 ifCounter++;
-                parserList.push_back(item);
+                parserList.pushBack(item);
                 continue;
             }
             if (type == "or(") {
                 vector<ForStruct> forStorage = ForStruct::extractAndProcessFors(initialText);
                 item.setFor(forStorage[forCounter]);
                 forCounter++;
-                parserList.push_back(item);
+                parserList.pushBack(item);
                 continue;
             }
             if (type == "ch(") {
                 vector<SwitchStruct> switchStorage = SwitchStruct::extractAndProcessSwitch(initialText);
                 item.setSwitch(switchStorage[switchCounter]);
                 switchCounter++;
-                parserList.push_back(item);
+                parserList.pushBack(item);
                 continue;
             }
         }
-//    setMainStorage(parserList);
     return parserList;
 }
 void Parser::setFor(const ForStruct& forElement) {
@@ -55,60 +55,60 @@ void Parser::setSwitch(const SwitchStruct &switchElement) {
     this-> Switch = switchElement;
 }
 
-void Parser::createText(const vector<Parser>& arr) {
-    for (const auto & i : arr) {
+void Parser::createText( List<Parser> arr) {
+    for (int i = 0; i < arr.getSize() ; i++) {
         string item;
-        if ( !i.getFor().getConditionElement().empty()) {
-            int num = countSign(i.getFor().getBody());
-            if (!i.getFor().getBody().empty()) {
+        if ( !arr[i].getFor().getConditionElement().empty()) {
+            int num = countSign(arr[i].getFor().getBody());
+            if (!arr[i].getFor().getBody().empty()) {
                 if (num == 1) {
-                    item = "for(" + i.getFor().getInitElement() +
+                    item = "for(" + arr[i].getFor().getInitElement() +
                            ";" +
-                           i.getFor().getConditionElement() +
+                            arr[i].getFor().getConditionElement() +
                            ";" +
-                           i.getFor().getIncrementElement() +
+                            arr[i].getFor().getIncrementElement() +
                            ")\n\t" +
-                           i.getFor().getBody() +
+                            arr[i].getFor().getBody() +
                            "\n\n";
                 } else {
-                    item = "for(" + i.getFor().getInitElement() +
+                    item = "for(" + arr[i].getFor().getInitElement() +
                            ";" +
-                           i.getFor().getConditionElement() +
+                            arr[i].getFor().getConditionElement() +
                            ";" +
-                           i.getFor().getIncrementElement() +
+                            arr[i].getFor().getIncrementElement() +
                            "){\n" +
-                           i.getFor().getBody() +
+                            arr[i].getFor().getBody() +
                            "\n}\n";
                 }
             } else {
-                item = "for(" + i.getFor().getInitElement() +
+                item = "for(" + arr[i].getFor().getInitElement() +
                        ";" +
-                       i.getFor().getConditionElement() +
+                        arr[i].getFor().getConditionElement() +
                        ";" +
-                       i.getFor().getIncrementElement() +
+                        arr[i].getFor().getIncrementElement() +
                        ");";
             }
             creatureReadyFile(item);
             continue;
         }
-        if ( !i.getIf().getCondition().empty()) {
-            int num = countSign(i.getIf().getBody());
+        if ( !arr[i].getIf().getCondition().empty()) {
+            int num = countSign(arr[i].getIf().getBody());
             if (num == 1) {
-                item = "if(" + i.getIf().getCondition() +
+                item = "if(" + arr[i].getIf().getCondition() +
                        ")\n\t" +
-                       i.getIf().getBody();
+                        arr[i].getIf().getBody();
             } else {
-                item = "if(" + i.getIf().getCondition() +
+                item = "if(" + arr[i].getIf().getCondition() +
                        "){\n\t" +
-                       i.getIf().getBody()+
+                        arr[i].getIf().getBody()+
                        "}";
             }
             creatureReadyFile(item);
             continue;
         }
-        if ( !i.getSwitch().getConditions().empty()){
-            item = "switch( " + i.getSwitch().getConditions() + "){" +
-                    i.getSwitch().getBody() + "}";
+        if ( !arr[i].getSwitch().getConditions().empty()){
+            item = "switch( " + arr[i].getSwitch().getConditions() + "){" +
+                    arr[i].getSwitch().getBody() + "}";
             creatureReadyFile(item);
             continue;
         }
