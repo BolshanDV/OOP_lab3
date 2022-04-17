@@ -17,6 +17,7 @@ vector<SwitchStruct> SwitchStruct::extractAndProcessSwitch(const string &text) {
     }
     return switchStorage;
 }
+
 vector<string> SwitchStruct::split(const string &s, const string &delimiter) {
     size_t pos_start = 0, pos_end, delim_len = delimiter.length();
     string token;
@@ -31,10 +32,12 @@ vector<string> SwitchStruct::split(const string &s, const string &delimiter) {
     res.push_back (s.substr (pos_start));
     return res;
 }
+
 struct Case {
     string conditional;
     string body;
 };
+
 string SwitchStruct::extractBody(string text) {
 //    Case caseObj;
 //    vector<Case> caseVector;

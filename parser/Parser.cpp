@@ -6,6 +6,7 @@
 #include <regex>
 #include "../ListStruct/List.h"
 #include "fstream"
+
 List<Parser> Parser::extract(const string& initialText) {
 //    setFor(ForStruct::extractAndProcessFors(initialText));
 //    setIf(IfStruct::extractAndProcessIf(initialText));
@@ -42,17 +43,6 @@ List<Parser> Parser::extract(const string& initialText) {
             }
         }
     return parserList;
-}
-void Parser::setFor(const ForStruct& forElement) {
-    this->For = forElement;
-}
-
-void Parser::setIf(const IfStruct &ifElement) {
-    this->If = ifElement;
-}
-
-void Parser::setSwitch(const SwitchStruct &switchElement) {
-    this-> Switch = switchElement;
 }
 
 void Parser::createText( List<Parser> arr) {
@@ -115,18 +105,6 @@ void Parser::createText( List<Parser> arr) {
     }
 }
 
-const ForStruct &Parser::getFor() const {
-    return For;
-}
-
-const IfStruct &Parser::getIf() const {
-    return If;
-}
-
-const SwitchStruct &Parser::getSwitch() const {
-    return Switch;
-}
-
 void Parser::creatureReadyFile(const string &text) {
     ofstream out;
     out.open("/Users/dmitrij/CLionProjects/OOP_lab3/text/result", ios::app);
@@ -143,3 +121,26 @@ int Parser::countSign(const string &body) {
     return counter;
 }
 
+const ForStruct &Parser::getFor() const {
+    return For;
+}
+
+const IfStruct &Parser::getIf() const {
+    return If;
+}
+
+const SwitchStruct &Parser::getSwitch() const {
+    return Switch;
+}
+
+void Parser::setFor(const ForStruct& forElement) {
+    this->For = forElement;
+}
+
+void Parser::setIf(const IfStruct &ifElement) {
+    this->If = ifElement;
+}
+
+void Parser::setSwitch(const SwitchStruct &switchElement) {
+    this-> Switch = switchElement;
+}
