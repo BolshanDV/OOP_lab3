@@ -125,7 +125,7 @@ public:
                            arr[i].getIf().getBody();
                 } else {
                     item = "if(" + arr[i].getIf().getCondition() +
-                           "){\t" +
+                           ") {\t" +
                            arr[i].getIf().getBody()+
                            "}";
                 }
@@ -133,7 +133,7 @@ public:
                 continue;
             }
             if ( !arr[i].getSwitch().getConditions().empty()){
-                item = "switch( " + arr[i].getSwitch().getConditions() + "){" +
+                item = "switch(" + arr[i].getSwitch().getConditions() + ") {" +
                        arr[i].getSwitch().getBody() + "}";
                 addOutput(item);
                 continue;

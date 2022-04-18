@@ -41,8 +41,7 @@ List<T>::Node::Node(T t, Node* n)
 }
 
 template<class T>
-List<T>::List()
-{
+List<T>::List(){
     size = 0;
     head = nullptr;
 }

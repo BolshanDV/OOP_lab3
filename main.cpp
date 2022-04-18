@@ -36,9 +36,6 @@ int main() {
         file.handleFile();
         fileNameIter++;
     }
-//    string initialText = readingFile();
-//    List<Parser> storage = parser.extract(initialText);
-//    parser.createText(storage);
     cout << "Successful" << endl;
     return 0;
 }
